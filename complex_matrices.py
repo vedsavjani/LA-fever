@@ -1,9 +1,7 @@
 from complex_nos import *
+from math import *
 
-# Matrix with complex entries
-M = [[(1,2), (3,-1)],
-     [(0,4), (2,2)]]
-
+##############################################################
 def add_complex_matrices(M1, M2):
     row1 = len(M1)
     col1 = len(M1[0])
@@ -20,6 +18,8 @@ def add_complex_matrices(M1, M2):
             M[i][j] = add_complex(c1,c2)
     return M
 
+
+##############################################################
 def scalar_multiply_matrix(M, k):
     M_new = [[(0,0)]*len(M[0]) for _ in range(len(M))]
     for i in range(len(M)):
@@ -27,10 +27,12 @@ def scalar_multiply_matrix(M, k):
             M_new[i][j] = multiply_complex(M[i][j], k)
     return M_new
 
+
+###############################################################
 def additive_inverse_matrix(M):
     return scalar_multiply_matrix(M, (-1,0))
 
-
+##############################################################
 def multiply_complex_matrices(A,B):
     row_a = len(A)
     col_a = len(A[0])
@@ -52,6 +54,8 @@ def multiply_complex_matrices(A,B):
 
     return C
 
+
+##########################################################
 def conjugate_transpose_complex_matrix(M):
     m = len(M)
     n = len(M[0])
@@ -65,3 +69,40 @@ def conjugate_transpose_complex_matrix(M):
 
     return C
 
+
+#############################################################
+def isHermitian(M):
+    return M == conjugate_transpose_complex_matrix(M)
+
+
+#############################################################
+def isUnitary(U):
+    n = len(U)
+    m = len(U[0])
+    
+    if (n != m):
+        return False
+    
+    U_t = conjugate_transpose_complex_matrix(U)
+
+    I = [[(0,0)]*n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                I[i][j] = (1,0)
+    
+    return matrices_approx_equal(multiply_complex_matrices(U, U_t),I) and matrices_approx_equal(multiply_complex_matrices(U_t, U),I)
+
+
+#######################################################################
+def matrices_approx_equal(A, B, tol=1e-9):
+    for i in range(len(A)):
+        for j in range(len(A[0])):
+            (a1,b1) = A[i][j]
+            (a2,b2) = B[i][j]
+            if abs(a1-a2) > tol or abs(b1-b2) > tol:
+                return False
+    return True
+
+
+########################################################################

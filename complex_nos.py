@@ -12,6 +12,7 @@ this program can do the following:
 
 from math import *
 
+#######################################################################
 
 def add_complex(a, b):
     (x1, y1) = a
@@ -19,18 +20,22 @@ def add_complex(a, b):
     return (x1 + x2, y1 + y2)
 
 
+#######################################################################
 def sub_complex(a, b):
     (x1, y1) = a
     (x2, y2) = b
     return (x1 - x2, y1 - y2)
 
 
+
+#######################################################################
 def multiply_complex(a, b):
     (x1, y1) = a
     (x2, y2) = b
     return (x1*x2 - y1*y2, x1*y2 + x2*y1)
 
 
+#######################################################################
 def divide_complex(a,b):
     c = conjugate_complex(b)
     (p,q) = multiply_complex(a,c)
@@ -38,21 +43,27 @@ def divide_complex(a,b):
     return (p/mod_sq, q/mod_sq)
 
 
+#######################################################################
 def modulus_complex(a):
     (x1,x2) = a
     return sqrt(x1*x1 + x2*x2)
 
 
+#######################################################################
 def conjugate_complex(a):
     (x1,x2) = a
     return (x1, -x2)
 
+
+#######################################################################
 def cartesian_polar(C):
     (a,b) = C
     r = modulus_complex(C)
     theta = atan2(b, a)  #gives theta in radians
     return (r,theta)
 
+
+#######################################################################
 def polar_to_cartesian(P):
     (r, theta) = P
     a = r * cos(theta)
