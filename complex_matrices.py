@@ -30,24 +30,6 @@ def scalar_multiply_matrix(M, k):
 def additive_inverse_matrix(M):
     return scalar_multiply_matrix(M, (-1,0))
 
-# def matmul(A,B):
-    # row_a = len(A)
-    # col_a = len(A[0])
-    # row_b = len(B)
-    # col_b = len(B[0])
-    
-    # if (col_a != row_b):
-    #     print("Matrices not compatible to multiply.")
-    #     return -1    
-    
-    # C = [[0]*col_b for _ in range(row_a)]              #[0] * 3 → [0, 0, 0]
-
-#     for i in range(row_a):
-#         for j in range(col_b):
-#             for k in range(row_b):
-#                 C[i][j] += A[i][k]*B[k][j]
-
-#     return C
 
 def multiply_complex_matrices(A,B):
     row_a = len(A)
@@ -70,23 +52,16 @@ def multiply_complex_matrices(A,B):
 
     return C
 
+def conjugate_transpose_complex_matrix(M):
+    m = len(M)
+    n = len(M[0])
 
-M1 = [[(1,2), (3,-1)],
-      [(0,4), (2,2)]]
+    C = [[(0,0)]*m for _ in range(n)]
 
-M2 = [[(1,-2), (-3,1)],
-      [(0,-4), (-2,-2)]]
+    for i in range(n):
+        for j in range(m):
+            (a,b) = M[j][i]
+            C[i][j] = (a,-b)
 
-print(add_complex_matrices(M1, M2))    # expect [[(2,0),(0,0)],[(0,0),(0,0)]]
-print(additive_inverse_matrix(M1))     # expect [[(-1,-2),(-3,1)],[(0,-4),(-2,-2)]]
-print(scalar_multiply_matrix(M1, (0,1)))  # multiply by i: expect [[(-2,1),(-1,-3)],[(-4,0),(-2,2)]]
+    return C
 
-A = [[(1,0), (0,1)],
-     [(0,1), (1,0)]]
-
-B = [[(1,0), (0,1)],
-     [(0,1), (1,0)]]
-
-print(multiply_complex_matrices(A, B))
-# expect [[(0,0),(0,2)],[(0,2),(0,0)]]
-# because (1+0i)(1+0i) + (0+1i)(0+1i) = 1 + (-1) = 0
