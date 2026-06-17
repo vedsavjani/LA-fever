@@ -1,4 +1,4 @@
-from pprint import pprint
+#matrix multiplication with real entries
 
 def matmul(A,B):
     row_a = len(A)
@@ -19,16 +19,3 @@ def matmul(A,B):
 
     return C
 
-A = [
-    [0,1],
-    [1,0]
-]
-
-B = [
-    [3],
-    [8]
-]
-
-C = matmul(A,B)
-for row in C:
-    print(row)

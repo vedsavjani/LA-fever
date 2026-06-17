@@ -106,3 +106,17 @@ def matrices_approx_equal(A, B, tol=1e-9):
 
 
 ########################################################################
+def complex_tensor_product(A,B):
+    n1 = len(A)
+    m1 = len(A[0])
+    n2 = len(B)
+    m2 = len(B[0])
+
+    C = [[(0,0)]*m1*m2 for _ in range(n1*n2)]
+    for i in range(n1):
+        for j in range(m1):
+            for k in range(n2):
+                for l in range(m2):
+                    C[i*n2 + k][j*m2 + l] = multiply_complex(A[i][j], B[k][l])
+    return C
+
